@@ -30,14 +30,33 @@ int InitList(LinkList * L)
     }
     printf("End.\n");
 }
-
+LinkList FindPrevious(LinkList L,int e)
+{
+    LinkList p=L;
+    while(p->next!=NULL && p->next->data!=e)
+	p=p->next;
+    if(p->next==NULL)
+	return NULL;
+    else 
+	return p;
+}
+int GetNode(LinkList L,int e,LinkList *d)
+{
+    LinkList q=L->next;
+    while(q!=NULL && q->data!=e)
+	q=q->next;
+    if(q==NULL)
+	return 0;
+    *d=q;
+    return 1;
+}
 int PrintList(LinkList L)
 {
     LinkList p;
     p = L->next;
     while(p!=NULL)
     {
-	printf("\t%d",p->data);
+	printf("%d\n",p->data);
 	p = p->next;
     }
     return;
@@ -99,11 +118,15 @@ int TarverseList(LinkList *L)
 }
 int main()
 {
-    LinkList L;
+    LinkList L,e,p;
     InitList(&L);
     PrintList(L);
-    InsertList(&L,1,100);
-    DeleteList(&L,1);
-    TarverseList(&L);
-    PrintList(L);
+    //InsertList(&L,1,100);
+    //DeleteList(&L,1);
+//    TarverseList(&L);
+  //  PrintList(L);
+  //  if(GetNode(L,4,&e))
+    //    printf("%d\n",e->data);
+    if((p=FindPrevious(L,1))!=NULL)
+	printf("%d\n",p->data);
 }
